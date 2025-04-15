@@ -1,10 +1,8 @@
 const mongoose = require('mongoose')
 
 const cartSchema = mongoose.Schema({
-  departure: String,
-  arrival: String,
-  date: Date,
-  price: Number,
+  isPaid: Boolean,
+  trips: [{type: mongoose.Schema.Types.ObjectId, ref: 'trips'}]
 })
 
 const Cart = mongoose.model('carts', cartSchema)

@@ -6,6 +6,7 @@ const Cart = require("../models/carts");
 router.post('/', (req, res) => {
   const newCart = new Cart({
     isPaid: false,
+    addToCart: true,
     trips: req.body.id,
   })
   newCart.save().then(data => {
@@ -24,7 +25,9 @@ router.get('/', (req, res) => {
 })
 
 router.delete('/', (req, res) => {
-  Cart.deleteOne()
+  Cart.deleteOne().then( data => {
+
+  } )
 })
 
 module.exports = router;

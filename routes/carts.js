@@ -7,7 +7,7 @@ router.post('/', (req, res) => {
   const newCart = new Cart({
     isPaid: false,
     addToCart: true,
-    trips: req.body.id,
+    trips: req.body.tripId,
   })
   newCart.save().then(data => {
     res.json({result: true, cart: data})
@@ -15,7 +15,8 @@ router.post('/', (req, res) => {
 });
 
 router.get('/cart', (req, res) => {
-  Cart.find({addToCart: true}).then(data => {
+  Cart.find({addToCart: true}).populate('trips').then(data => {
+    console.log(data)
     if (data.length === 0) {
       res.json({result: false})
     } else {
@@ -25,7 +26,7 @@ router.get('/cart', (req, res) => {
 })
 
 router.get('/book', (req, res) => {
-  Cart.find({isPaid: true}).then(data => {
+  Cart.find({isPaid: true}).populate('trips').then(data => {
     if (data.length === 0) {
       res.json({result: false})
     } else {

@@ -24,9 +24,23 @@ router.get('/', (req, res) => {
   })
 })
 
-router.delete('/', (req, res) => {
-  Cart.deleteOne().then( data => {
+router.put('/book', (req, res) => {
+  Cart.updateOne({trips: req.body.id}, {isPaid: true})
+  .then(data => {
+    console.log(data)
+  })
+})
 
+router.put('/cancel', (req, res) => {
+  Cart.updateOne({trips: req.body.id}, {addToCart: false})
+  .then(data => {
+    console.log(data)
+  })
+})
+
+router.delete('/', (req, res) => {
+  Cart.deleteMany({addToCart: false}).then( data => {
+    console.log(data)
   } )
 })
 

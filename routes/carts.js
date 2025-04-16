@@ -14,8 +14,8 @@ router.post('/', (req, res) => {
   })
 });
 
-router.get('/', (req, res) => {
-  Cart.find().then(data => {
+router.get('/cart', (req, res) => {
+  Cart.find({addToCart: true}).then(data => {
     if (data.length === 0) {
       res.json({result: false})
     } else {
@@ -24,7 +24,17 @@ router.get('/', (req, res) => {
   })
 })
 
-router.put('/book', (req, res) => {
+router.get('/book', (req, res) => {
+  Cart.find({isPaid: true}).then(data => {
+    if (data.length === 0) {
+      res.json({result: false})
+    } else {
+      res.json({result: true, cart: data})
+    }
+  })
+})
+
+router.put('/buy', (req, res) => {
   Cart.updateOne({trips: req.body.id}, {isPaid: true})
   .then(data => {
     console.log(data)

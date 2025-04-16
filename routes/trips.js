@@ -12,8 +12,8 @@ router
       res.json({result: false})
     } else {
       Trip.find({
-        departure: req.body.departure,
-        arrival: req.body.arrival,
+        departure: { $regex: new RegExp(req.body.departure, 'i') },
+        arrival: { $regex: new RegExp(req.body.arrival, 'i') },
         date: {$gte:moment(formatDate).startOf('day'), $lte: moment(formatDate).endOf('day') }
       })
     .then(data => {

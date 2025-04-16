@@ -38,14 +38,14 @@ router.get('/book', (req, res) => {
 router.put('/buy', (req, res) => {
   Cart.updateMany({addToCart: true}, {isPaid: true})
   .then(data => {
-    console.log(data)
+    res.json({result: true})
   })
 })
 
 router.put('/cancel', (req, res) => {
   Cart.updateOne({trips: req.body.tripId}, {addToCart: false})
   .then(data => {
-    console.log(data)
+    res.json({result: true})
   })
 })
 

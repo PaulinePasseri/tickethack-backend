@@ -36,14 +36,14 @@ router.get('/book', (req, res) => {
 })
 
 router.put('/buy', (req, res) => {
-  Cart.updateOne({trips: req.body.id}, {isPaid: true})
+  Cart.updateOne({trips: req.body.tripId}, {isPaid: true})
   .then(data => {
     console.log(data)
   })
 })
 
 router.put('/cancel', (req, res) => {
-  Cart.updateOne({trips: req.body.id}, {addToCart: false})
+  Cart.updateOne({trips: req.body.tripId}, {addToCart: false})
   .then(data => {
     console.log(data)
   })

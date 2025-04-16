@@ -50,9 +50,11 @@ router.put('/buy', (req, res) => {
 // })
 
 router.delete('/', (req, res) => {
-  Cart.deleteOne({trips: req.body.tripId}).then( data => {
-    console.log(data)
-  } )
+  Cart.deleteOne({trips: req.body.tripId}).then(() => {
+    Cart.find().populate('trips').then(data => {
+      res.json({result: true, cart: data})
+    })
+  })
 })
 
 module.exports = router;

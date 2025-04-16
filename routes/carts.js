@@ -42,12 +42,12 @@ router.put('/buy', (req, res) => {
   })
 })
 
-// router.put('/cancel', (req, res) => {
-//   Cart.updateOne({trips: req.body.tripId}, {addToCart: false})
-//   .then(data => {
-//     res.json({result: true})
-//   })
-// })
+router.put('/cancel', (req, res) => {
+  Cart.updateMany({addToCart: true}, {addToCart: false})
+  .then(data => {
+    res.json({result: true})
+  })
+})
 
 router.delete('/', (req, res) => {
   Cart.deleteOne({trips: req.body.tripId}).then(() => {
